@@ -210,8 +210,8 @@ static CGFloat const ATLChevronIconViewRightPadding = 14.0f;
 
 - (void)setConversationTitleLabelFont:(UIFont *)conversationTitleLabelFont
 {
-    _conversationTitleLabelFont = conversationTitleLabelFont;
-    self.conversationTitleLabel.font = conversationTitleLabelFont;
+//    _conversationTitleLabelFont = conversationTitleLabelFont;
+//    self.conversationTitleLabel.font = conversationTitleLabelFont;
 }
 
 - (void)setConversationTitleLabelColor:(UIColor *)conversationTitleLabelColor
@@ -302,6 +302,12 @@ static CGFloat const ATLChevronIconViewRightPadding = 14.0f;
 {
     self.accessibilityLabel = conversationTitle;
     self.conversationTitleLabel.text = conversationTitle;
+}
+
+- (void)updateWithConversationAttributedTitle:(NSAttributedString *)conversationTitle
+{
+    self.accessibilityLabel = conversationTitle;
+    self.conversationTitleLabel.attributedText = conversationTitle;
 }
 
 #pragma mark - Helpers

@@ -109,7 +109,7 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
 {
     [super viewDidLoad];
     
-    self.title = ATLLocalizedString(@"atl.conversationlist.title.key", ATLConversationListViewControllerTitle, nil);
+//    self.title = ATLLocalizedString(@"atl.conversationlist.title.key", ATLConversationListViewControllerTitle, nil);
     self.accessibilityLabel = ATLConversationListViewControllerTitle;
 
     self.tableView.accessibilityLabel = ATLConversationTableViewAccessibilityLabel;
@@ -324,12 +324,19 @@ NSString *const ATLConversationListViewControllerDeletionModeEveryone = @"Everyo
            @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Conversation View Delegate must return an object conforming to the `ATLAvatarItem` protocol." userInfo:nil];
         }
     }
+
     
-    if ([self.dataSource respondsToSelector:@selector(conversationListViewController:titleForConversation:)]) {
+    if ([self.dataSource respondsToSelector:@selector(conversationListViewController:attributedTitleForConversation:)]) {
+    NSString *reuseIdentifier = [self reuseIdentifierForConversation:nil atIndexPath:indexPath];
+    
+        NSAttributedString *conversationTitle = [self.dataSource conversationListViewController:self attributedTitleForConversation:conversation];
+        [conversationCell updateWithConversationAttributedTitle:conversationTitle];
+    } else if ([self.dataSource respondsToSelector:@selector(conversationListViewController:titleForConversation:)]) {
         NSString *conversationTitle = [self.dataSource conversationListViewController:self titleForConversation:conversation];
         [conversationCell updateWithConversationTitle:conversationTitle];
     } else {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Conversation View Delegate must return a conversation label" userInfo:nil];
+
     }
     
     NSString *lastMessageText;

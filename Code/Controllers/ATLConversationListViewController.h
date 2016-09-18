@@ -85,6 +85,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
+- (NSAttributedString *)conversationListViewController:(ATLConversationListViewController *)conversationListViewController attributedTitleForConversation:(LYRConversation *)conversation;
+
 /**
  @abstract Asks the delegate for an avatar item representing a conversation.
  @param conversationListViewController The `LYRConversationListViewController` in which the item's data will appear.

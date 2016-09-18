@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param conversationTitle The conversation title to display.
  */
 - (void)updateWithConversationTitle:(NSString *)conversationTitle;
-
+- (void)updateWithConversationAttributedTitle:(NSAttributedString *)conversationTitle;
 /**
  @abstract Gives the receiver an object conforming to the `ATLAvatarItem` protocol.
  @param avatarItem The object conforming to `ATLAvatarItem` protocol.
