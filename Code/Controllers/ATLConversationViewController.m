@@ -271,8 +271,14 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     
     // Configure message bar button enablement
     BOOL shouldEnableButton = self.conversation ? YES : NO;
+    
     self.messageInputToolbar.rightAccessoryButton.enabled = shouldEnableButton;
     self.messageInputToolbar.leftAccessoryButton.enabled = shouldEnableButton;
+    
+    //hide the message input if it's a disabled conversation
+    if ([self.conversation.metadata valueForKey:@"disabled"]) {
+        self.messageInputToolbar.hidden = YES;
+    }
     
     // Mark all messages as read if needed
     if (self.conversation.lastMessage && self.marksMessagesAsRead) {
@@ -859,6 +865,8 @@ static NSInteger const ATLPhotoActionSheet = 1000;
     [self configureControllerForConversation];
     [self.collectionView reloadData];
 }
+
+
 
 #pragma mark - Device Rotation
 
